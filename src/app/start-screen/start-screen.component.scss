@@ -1,0 +1,38 @@
+.posAbs {
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.d-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.start-screen {
+    background-color: #404040;
+    @extend .d-flex;
+    height: 100vh;
+    width: 100vw;
+    max-width: 100%;
+
+    & img {
+        height: 100vh;
+    }
+}
+
+.start-label-box {
+    @extend .posAbs;
+    bottom: 120px;
+    display: flex;
+    justify-content: center;
+    & img {
+        width: 30vw;
+        height: auto;
+        &:hover {
+            filter: brightness(1.3);
+            cursor: pointer;
+        }
+    }
+}
