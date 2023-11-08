@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-add-playe',
@@ -6,9 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./dialog-add-playe.component.scss']
 })
 export class DialogAddPlayeComponent {
-  name: any;
-  onNoClick() {
+  name: String = "";
 
+  constructor(private dialogRef: MatDialogRef<DialogAddPlayeComponent>) {
+    
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

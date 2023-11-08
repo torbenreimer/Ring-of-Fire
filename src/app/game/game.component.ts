@@ -24,22 +24,37 @@ export class GameComponent implements OnInit {
   }
 
   takeCard() {
-    if (!this.pickCardAnimation) {
-      this.currentCard = this.game.stack.pop()!;
-      this.pickCardAnimation = true;
-      console.log(this.game)
-      setTimeout(() => {
-        this.pickCardAnimation = false;
-        this.game.playedCard.push(this.currentCard);
-      }, 1000);
+    if (this.game.players.length < 1) {
+      this.openDialog();
+    } else {
+      if (!this.pickCardAnimation) {
+        this.currentCard = this.game.stack.pop()!;
+        this.pickCardAnimation = true;
+        this.playedCard();
+        this.nextPlayer();
+      }
     }
+  }
+
+  playedCard() {
+    setTimeout(() => {
+      this.pickCardAnimation = false;
+      this.game.playedCard.push(this.currentCard);
+    }, 1000);
+  }
+
+  nextPlayer() {
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length
   }
 
   openDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayeComponent);
 
     dialogRef.afterClosed().subscribe((name: String) => {
-      this.game.players.push(name);
+      if (name && name.length > 0) {
+        this.game.players.push(name);
+      }
     });
   }
 
